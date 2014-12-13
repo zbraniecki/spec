@@ -101,3 +101,19 @@ The example HTML header of a localizable document looks like this:
 Language negotiation will happen in mozL10n library, and will result in async XHR request for the resource file. Once the resource is loaded, mozL10n will be ready to localize Elements.
 
 One idea is to provide a method for instrumenting Gecko to stop creating frames until l10n resources are loaded and one for enabling it again.
+
+
+Open questions
+-----------
+
+There are a lot of open questions here that fall into three buckets:
+
+* What is going to be the nature of the localized DOM Element. Similar to ShadowDOM? Different? How can we make it performant.
+* How can we hook l10n into HTML processing to stop redundant operations on untranslated and then translated DOM
+* What hooks and non-public APIs do we need to move part of the localization to the platform and keep the non-frozen part in the client-side library
+
+There's an Proof of Concept branch of l20n that uses the API proposed above, available at https://github.com/zbraniecki/l20n.js/tree/webl10n.
+
+* https://github.com/zbraniecki/l20n.js/blob/webl10n/examples/webl10n.html is an example HTML file
+* https://github.com/zbraniecki/l20n.js/blob/webl10n/examples/webl10n.js contains the shim WebAPI
+* https://github.com/zbraniecki/l20n.js/blob/webl10n/examples/l10n.js is a shim library that uses the WebAPI
